@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+
+<script>
+function saveForm()
+{
+	var txtName = $("#txtName").val();
+	var txtDescription = $("#txtDescription").val();
+	var hidID = $("#hidID").val();
+
+	$.ajax({
+	url: '/update_world',
+	data: { name: txtName, description:txtDescription, id: hidID },
+	type: 'POST',
+	success: function(response) {
+		console.log(response);
+		window.location = "/";
+	},
+	error: function(error) {
+		console.log(error);
+	}
+	});
+
+}
+
+function deleteRecord()
+{
+	if(confirm("Are you sure you want to delete this record?  Click OK to proceed."))
+	{
+		
+	}
+}
+</script>
+
+<div class="container">
+	<div class="row">
+	<form class="form-horizontal">
+		<fieldset>
+
+		<!-- Form Name -->
+		<legend>Edit World</legend>
+
+		<!-- Text input-->
+
+		<div class="form-group" style="display:none;">
+			<label class="col-md-4 control-label" for="textinput">ID</label>  
+			<div class="col-md-4">
+			<input id="hidID" name="hidID" type="text" placeholder="ID" class="form-control input-md" value="{{record._id}}">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="textinput">Name</label>  
+			<div class="col-md-4">
+			<input id="txtName" name="txtName" type="text" placeholder="Enter world name" class="form-control input-md" value="{{record.name}}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="textinput">Description</label>  
+			<div class="col-md-4">
+			<input id="txtDescription" name="txtDescription" type="text" placeholder="Enter description" class="form-control input-md"  			value="{{record.description}}">
+			</div>
+		</div>
+
+		</fieldset>
+
+		<input type="button" value="Save"  class="btn btn-primary" onclick="saveForm()">
+		<input type="button" value="Delete"  class="btn btn-primary" onclick="deleteRecord()">
+
+	</form>
+
+	</div>
+</div>
+
+
+{% endblock %}

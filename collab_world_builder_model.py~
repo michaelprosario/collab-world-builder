@@ -1,0 +1,5 @@
+
+class WorldRepo():
+	def add(self,record):
+		return false
+

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Bot Maker</title>
+
+
+<script src="/static/blockly_compressed.js"></script>
+<script src="/static/blocks_compressed.js"></script>
+<script src="/static/javascript_compressed.js"></script>
+<script src="/static/msg/js/en.js"></script>
+<script src="/static/jquery.min.js"></script>
+<script src="/static/robotMaker.js"></script>
+<link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+
+<style>
+	body {
+	font-family: sans-serif;
+	}
+	h1 {
+	font-weight: normal;
+	font-size: 140%;
+	}
+
+	#txtCode{
+	width:100%;
+	height:600px;
+	}
+
+	.appHeader {
+	padding:5px;
+	}
+
+	td {
+	padding:5px;
+	}
+
+	#blocklyDiv{
+	width:100%;
+	height:600px;
+	}
+
+</style>
+
+<script>
+
+</script>
+</head>
+<body onload="bodyOnLoad()">
+<input type="hidden" name="hidRecordID" id="hidRecordID" value="{{record._id}}">
+<input type="hidden" name="hidWorldId" id="hidWorldId" value="{{record.worldId}}">
+
+
+<h1 class="appHeader">Edit Script</h1> 
+<div>
+<table>
+  <tr>
+    <td>Name:</td>
+    <td><input id="txtName" type="text" value="{{record.name}}"></td>
+  </tr>
+  <tr>
+    <td>Description:</td>
+    <td><input id="txtDescription" type="text" value="{{record.description}}"></td>
+  </tr> 
+  <tr>
+    <td>&nbsp;</td>
+    <td>
+    <button onclick="saveScript()"  class="btn btn-info">Save</button>	
+    <button onclick="deleteScript()"  class="btn btn-info">Delete</button>	
+    <button onclick="saveCode('3d-world')"  class="btn btn-info">Draw </button>	
+    <button onclick="saveCode('cardboard')"  class="btn btn-info" style="display:none;">Make Google Cardboard</button>	
+    <button onclick="backToList()"  class="btn btn-info">View World Scripts</button>	
+
+    </td>
+  </tr>
+</table>
+</div>
+
+
+<div id="blocklyDiv" ></div>
+<br>
+
+  
+  
+  <textarea id="txtCode">{{record.javascript}}</textarea><br>
+  <textarea id="txtBlocklyXML" style="display:none;">{{record.blocklyXml}}</textarea>
+  <xml id="toolbox" style="display: none">
+
+	<category name="Bot">
+      		
+		<block type="box">
+			<value name="width"><block type="math_number"><field name="NUM">1</field></block></value>
+			<value name="height"><block type="math_number"><field name="NUM">1</field></block></value>
+			<value name="depth"><block type="math_number"><field name="NUM">1</field></block></value>
+		</block>
+
+		<block type="cylinder">
+			<value name="radius"><block type="math_number"><field name="NUM">10</field></block></value>
+			<value name="height"><block type="math_number"><field name="NUM">3</field></block></value>
+		</block>
+		<block type="cone">
+			<value name="radius"><block type="math_number"><field name="NUM">10</field></block></value>
+			<value name="height"><block type="math_number"><field name="NUM">3</field></block></value>
+		</block>
+				
+
+		<block type="sphere">
+			<value name="type"><block type="text"><field name="TEXT">1</field></block></value>
+			<value name="radius"><block type="math_number"><field name="NUM">10</field></block></value>
+		</block>	
+		<block type="move_to">
+			<value name="x"><block type="math_number"><field name="NUM">1</field></block></value>
+			<value name="y"><block type="math_number"><field name="NUM">1</field></block></value>
+			<value name="z"><block type="math_number"><field name="NUM">1</field></block></value>
+		</block>
+
+		<block type="up">
+			<value name="blocks"><block type="math_number"><field name="NUM">1</field></block></value>
+		</block>
+		<block type="fwd">
+			<value name="blocks"><block type="math_number"><field name="NUM">1</field></block></value>
+		</block>			
+		<block type="turn">
+			<value name="blocks"><block type="math_number"><field name="NUM">1</field></block></value>
+		</block>		
+		<block type="left">
+			<value name="blocks"><block type="math_number"><field name="NUM">1</field></block></value>
+		</block>	
+		<block type="right">
+			<value name="blocks"><block type="math_number"><field name="NUM">1</field></block></value>
+		</block>	
+		<block type="set_color">
+			<value name="color"><block type="text"></block></value>
+		</block>
+		<block type="chkpt">
+			<value name="title"><block type="text"></block></value>
+		</block>
+		
+		<block type="move">
+			<value name="title"><block type="text"></block></value>
+		</block>
+		<block type="text"></block>		
+	</category>
+	<category name="Logic">
+      <category name="If">
+        <block type="controls_if"></block>
+        <block type="controls_if">
+          <mutation else="1"></mutation>
+        </block>
+        <block type="controls_if">
+          <mutation elseif="1" else="1"></mutation>
+        </block>
+      </category>
+      <category name="Boolean">
+        <block type="logic_compare"></block>
+        <block type="logic_operation"></block>
+        <block type="logic_negate"></block>
+        <block type="logic_boolean"></block>
+        <block type="logic_null"></block>
+        <block type="logic_ternary"></block>
+      </category>
+    </category>
+    <category name="Loops">
+      <block type="controls_repeat_ext">
+        <value name="TIMES">
+          <block type="math_number">
+            <field name="NUM">10</field>
+          </block>
+        </value>
+      </block>
+      <block type="controls_whileUntil"></block>
+      <block type="controls_for">
+        <field name="VAR">i</field>
+        <value name="FROM">
+          <block type="math_number">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+        <value name="TO">
+          <block type="math_number">
+            <field name="NUM">10</field>
+          </block>
+        </value>
+        <value name="BY">
+          <block type="math_number">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+      </block>
+      <block type="controls_flow_statements"></block>
+    </category>
+    <category name="Math">
+      <block type="math_number"></block>
+      <block type="math_arithmetic"></block>
+      <block type="math_single"></block>
+      <block type="math_trig"></block>
+      <block type="math_constant"></block>
+      <block type="math_number_property"></block>
+      <block type="math_change">
+        <value name="DELTA">
+          <block type="math_number">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+      </block>
+      <block type="math_round"></block>
+      <block type="math_modulo"></block>
+      <block type="math_random_int">
+        <value name="FROM">
+          <block type="math_number">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+        <value name="TO">
+          <block type="math_number">
+            <field name="NUM">100</field>
+          </block>
+        </value>
+      </block>
+      <block type="math_random_float"></block>
+    </category>
+    <category name="Variables" custom="VARIABLE"></category>
+    <category name="Functions" custom="PROCEDURE"></category>
+  </xml>
+
+  <xml id="startBlocks" style="display: none"></xml>
+	
+  <script>
+    Blockly.inject(document.getElementById('blocklyDiv'),{toolbox: document.getElementById('toolbox')});
+  </script>
+ 
+
+<!-- Modal -->
+<div id="divMyAlert" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Bot Maker</h3>
+  </div>
+  <div class="modal-body" id="divAlertText"></div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div> 
+
+
+  
+   <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

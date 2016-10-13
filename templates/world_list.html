@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+
+<script>
+function newRecord()
+{
+	window.location = "/create_world";
+}
+
+function editScripts(worldID)
+{
+	window.location = "list_scripts?worldID=" + worldID
+}
+
+function view(worldID)
+{
+	window.open( "/draw_world_scripts?worldId=" + worldID );
+}
+</script>
+
+<div class="container">
+	<div class="row">
+		<h2>World List</h2>
+		<input type="button" value="Add"  class="btn btn-primary" onclick="newRecord()">
+
+        <div class="row">
+    <div class="col-md-4">
+        <div class="list-group list-cust">
+
+		{% for world in worlds %}
+
+		<div class="list-group-item">
+		
+		<a href="/edit_world?id={{world._id}}"  >{{world.name}}</a>
+		
+		<input type="button" value="Edit Scripts"  class="" onclick="editScripts('{{world._id}}')" style="float:right">
+		<input type="button" value="View"  class="" onclick="view('{{world._id}}')"  style="float:right">
+		</div>
+		
+		{% endfor %}
+
+        </div>
+    </div>
+</div>
+	
+{% endblock %}

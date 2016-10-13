@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+
+<script>
+function newRecord()
+{
+	window.location = "/create_script?worldId={{world_id}}";
+}
+
+function viewWorldList()
+{
+	window.location = "/";
+}
+
+function drawWorldScripts()
+{
+	window.open( "/draw_world_scripts?worldId={{world_id}}" );	
+}
+
+</script>
+
+<div class="container">
+	<div class="row">
+		<h2>World Scripts</h2>
+		<input type="button" value="Add"  class="btn btn-primary" onclick="newRecord()">
+		<input type="button" value="View World List"  class="btn btn-primary" onclick="viewWorldList()">
+		<input type="button" value="Draw Scripts"  class="btn btn-primary" onclick="drawWorldScripts()">
+
+        <div class="row">
+    <div class="col-md-4">
+        <div class="list-group list-cust">
+
+		{% for record in records %}
+
+		<div class="list-group-item">
+		<a href="/edit_script?id={{record._id}}"  >{{record.name}}
+		</a>
+		
+		</div>
+		
+		{% endfor %}
+
+        </div>
+    </div>
+</div>
+	
+{% endblock %}
