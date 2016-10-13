@@ -10,7 +10,6 @@ function rgb(r, g, b) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
-
 function Bot()
 {
 	this.angle = 0;
@@ -21,7 +20,10 @@ function Bot()
 
 	this.getDefaultMaterial = function()
 	{
-		var material = new THREE.MeshPhongMaterial( { color: this.drawColor, specular: 0x555555, shininess: 1 } )
+		material = new THREE.MeshLambertMaterial({
+      			color: this.drawColor
+    		});
+
 		return material;
 	}
 

@@ -4,23 +4,9 @@ from flask import request
 import random
 import WorldBuilder
 
-
-
 path_to_save = "./static/3DWorld/"
 
 app = Flask(__name__)
-
-@app.route("/make_test_data")
-def make_test_data():
-	worlds = WorldBuilder.WorldRepo()
-	for i in range(0,10):			
-		world = WorldBuilder.World()
-		world.name = "testWorld"
-		world.description = "description"
-		record_id = worlds.add(world)
-	return "done"
-
-
 
 @app.route("/")
 def world_list():
@@ -41,11 +27,7 @@ def list_scripts():
 	scripts = WorldBuilder.WorldScriptRepo()
 	recordID = request.args.get('worldID', '')
 	recordList = scripts.getScriptsForWorld(recordID)
-
-
 	return render_template('list_scripts.html', records= recordList, world_id = recordID)
-
-
 
 @app.route("/create_world")
 def create_world():
@@ -61,7 +43,6 @@ def create_world():
 
 	return render_template('edit_world.html', record = r)
 
-
 @app.route("/update_world", methods=['POST'])
 def update_world():
 	name = request.form['name']
@@ -73,7 +54,6 @@ def update_world():
 	record.name = name
 	record.description = description
 	worlds.update(record)
-
 
 	return "done"
 
@@ -90,8 +70,6 @@ def delete_script():
 	t = WorldBuilder.WorldScriptRepo()
 	t.delete(record_id)
 	return "done"
-
-
 
 @app.route("/create_script")
 def create_script():
@@ -116,26 +94,21 @@ def edit_script():
 	r = scripts.get(id)
 	return render_template('edit_script.html', record = r)
 
-@app.route("/")
-def start_page():
-	return render_template("edit.html");
+
+def get3DWorldContent(script_list):
+	return render_template("view_3d_world.html",scriptList = script_list, k=random.random());
 	 
 @app.route("/view_3d_world")
 def view_3d_world():
 	id = request.args.get('recordID')
 	script_list = []
 	script_list.append(id)
-	return render_template("view_3d_world.html",scriptList = script_list, k=random.random());
-
-
+	return get3DWorldContent(script_list)
 
 def write_js_code(jscode,id):
-
 	file = open(path_to_save + id +".js", "w")
 	file.write(jscode)
 	file.close()
-
-
 
 @app.route("/draw_world_scripts")
 def draw_world_scripts():
@@ -148,40 +121,25 @@ def draw_world_scripts():
 	script_list = []
 
 	for record in recordList:
-		script_list.append(record["_id"])
-				
+		script_list.append(record["_id"])				
 		write_js_code(record["javascript"],str(record["_id"]))
 
-
-
-	return render_template("view_3d_world.html",scriptList = script_list, k=random.random());
+	return get3DWorldContent(script_list)
 	
-	
-
-
 @app.route("/view_cardboard")
 def view_cardboard():
 	id = request.args.get('recordID')
 	return render_template("cardboard.html",recordID = id);
 
-
-
-
-
 @app.route("/save_js", methods=['POST'])
 def save_js():
 	jscode = request.form['jscode']
     	id = request.form['id']
-
 	write_js_code(jscode,id)
-
-
 	return "done"
-
 
 @app.route("/update_script", methods=['POST'])
 def update_script():
-
 	scripts = WorldBuilder.WorldScriptRepo()
 	record_id = request.form['id']
 	s = scripts.get(record_id)
@@ -190,7 +148,6 @@ def update_script():
 	s.javascript = request.form['javascript']
 	s.blocklyXml = request.form['blocklyXml']
 	scripts.update(s)
-
 
 	return "done"
 
