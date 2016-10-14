@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Bot Maker</title>
+<title>World Builder</title>
 
 
 <script src="/static/blockly_compressed.js"></script>
@@ -52,7 +52,7 @@
 <input type="hidden" name="hidWorldId" id="hidWorldId" value="{{record.worldId}}">
 
 
-<h1 class="appHeader">Edit Script</h1> 
+<h1 class="appHeader"><a href="/">Worlds</a> > <a href="javascript:backToList()">Scripts</a> > Edit </h1> 
 <div>
 <table>
   <tr>
@@ -69,7 +69,7 @@
     <button onclick="saveScript()"  class="btn btn-info">Save</button>	
     <button onclick="deleteScript()"  class="btn btn-info">Delete</button>	
     <button onclick="saveCode('3d-world')"  class="btn btn-info">Draw </button>	
-    <button onclick="saveCode('cardboard')"  class="btn btn-info" style="display:none;">Make Google Cardboard</button>	
+	<button onclick="saveCode('cardboard')"  class="btn btn-info" style="display:none;">Make Google Cardboard</button>	
     <button onclick="backToList()"  class="btn btn-info">View World Scripts</button>	
 
     </td>
@@ -88,59 +88,59 @@
   <xml id="toolbox" style="display: none">
 
 	<category name="Bot">
-      		
-		<block type="box">
-			<value name="width"><block type="math_number"><field name="NUM">1</field></block></value>
-			<value name="height"><block type="math_number"><field name="NUM">1</field></block></value>
-			<value name="depth"><block type="math_number"><field name="NUM">1</field></block></value>
-		</block>
+	
+	<block type="box">
+		<value name="width"><block type="math_number"><field name="NUM">1</field></block></value>
+		<value name="height"><block type="math_number"><field name="NUM">1</field></block></value>
+		<value name="depth"><block type="math_number"><field name="NUM">1</field></block></value>
+	</block>
 
-		<block type="cylinder">
-			<value name="radius"><block type="math_number"><field name="NUM">10</field></block></value>
-			<value name="height"><block type="math_number"><field name="NUM">3</field></block></value>
-		</block>
-		<block type="cone">
-			<value name="radius"><block type="math_number"><field name="NUM">10</field></block></value>
-			<value name="height"><block type="math_number"><field name="NUM">3</field></block></value>
-		</block>
-				
+	<block type="cylinder">
+		<value name="radius"><block type="math_number"><field name="NUM">10</field></block></value>
+		<value name="height"><block type="math_number"><field name="NUM">3</field></block></value>
+	</block>
+	<block type="cone">
+		<value name="radius"><block type="math_number"><field name="NUM">10</field></block></value>
+		<value name="height"><block type="math_number"><field name="NUM">3</field></block></value>
+	</block>
+			
 
-		<block type="sphere">
-			<value name="type"><block type="text"><field name="TEXT">1</field></block></value>
-			<value name="radius"><block type="math_number"><field name="NUM">10</field></block></value>
-		</block>	
-		<block type="move_to">
-			<value name="x"><block type="math_number"><field name="NUM">1</field></block></value>
-			<value name="y"><block type="math_number"><field name="NUM">1</field></block></value>
-			<value name="z"><block type="math_number"><field name="NUM">1</field></block></value>
-		</block>
+	<block type="sphere">
+		<value name="type"><block type="text"><field name="TEXT">1</field></block></value>
+		<value name="radius"><block type="math_number"><field name="NUM">10</field></block></value>
+	</block>	
+	<block type="move_to">
+		<value name="x"><block type="math_number"><field name="NUM">1</field></block></value>
+		<value name="y"><block type="math_number"><field name="NUM">1</field></block></value>
+		<value name="z"><block type="math_number"><field name="NUM">1</field></block></value>
+	</block>
 
-		<block type="up">
-			<value name="blocks"><block type="math_number"><field name="NUM">1</field></block></value>
-		</block>
-		<block type="fwd">
-			<value name="blocks"><block type="math_number"><field name="NUM">1</field></block></value>
-		</block>			
-		<block type="turn">
-			<value name="blocks"><block type="math_number"><field name="NUM">1</field></block></value>
-		</block>		
-		<block type="left">
-			<value name="blocks"><block type="math_number"><field name="NUM">1</field></block></value>
-		</block>	
-		<block type="right">
-			<value name="blocks"><block type="math_number"><field name="NUM">1</field></block></value>
-		</block>	
-		<block type="set_color">
-			<value name="color"><block type="text"></block></value>
-		</block>
-		<block type="chkpt">
-			<value name="title"><block type="text"></block></value>
-		</block>
-		
-		<block type="move">
-			<value name="title"><block type="text"></block></value>
-		</block>
-		<block type="text"></block>		
+	<block type="up">
+		<value name="blocks"><block type="math_number"><field name="NUM">1</field></block></value>
+	</block>
+	<block type="fwd">
+		<value name="blocks"><block type="math_number"><field name="NUM">1</field></block></value>
+	</block>			
+	<block type="turn">
+		<value name="blocks"><block type="math_number"><field name="NUM">1</field></block></value>
+	</block>		
+	<block type="left">
+		<value name="blocks"><block type="math_number"><field name="NUM">1</field></block></value>
+	</block>	
+	<block type="right">
+		<value name="blocks"><block type="math_number"><field name="NUM">1</field></block></value>
+	</block>	
+	<block type="set_color">
+		<value name="color"><block type="text"></block></value>
+	</block>
+	<block type="chkpt">
+		<value name="title"><block type="text"></block></value>
+	</block>
+	
+	<block type="move">
+		<value name="title"><block type="text"></block></value>
+	</block>
+	<block type="text"></block>		
 	</category>
 	<category name="Logic">
       <category name="If">

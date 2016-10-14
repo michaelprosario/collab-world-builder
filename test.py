@@ -88,10 +88,6 @@ class TestDatabaseOperations(unittest.TestCase):
 	self.assertTrue( record_id == world2._id)
 
 
-    def test_World__Get___ItShouldWork2(self):
-	worlds = WorldBuilder.WorldRepo()
-
-	self.assertTrue(worlds.recordExists("57fb27dbf6eda60d3b12da41"))
 
 
     def test_World__Update___ItShouldWork(self):
