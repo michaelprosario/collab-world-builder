@@ -257,12 +257,12 @@ Blockly.JavaScript['set_color'] = function(block) {
   return code;
 };	
 
-Blockly.Blocks['draw_text'] = {
+Blockly.Blocks['create_text'] = {
   init: function() {
     this.setHelpUrl('http://www.example.com/');
     this.appendValueInput("text")
         .setCheck("String")
-        .appendField("drawText text=");
+        .appendField("createText text=");
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -270,9 +270,9 @@ Blockly.Blocks['draw_text'] = {
   }
 };
 
-Blockly.JavaScript['draw_text'] = function(block) {
+Blockly.JavaScript['create_text'] = function(block) {
   var text = Blockly.JavaScript.valueToCode(block, 'text', Blockly.JavaScript.ORDER_ATOMIC);
-  var code = "bot.drawText(" +text+ ");\n";
+  var code = "bot.createText(" +text+ ");\n";
   return code;
 };	
 

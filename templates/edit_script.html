@@ -87,60 +87,68 @@
   <textarea id="txtBlocklyXML" style="display:none;">{{record.blocklyXml}}</textarea>
   <xml id="toolbox" style="display: none">
 
-	<category name="Bot">
+	<category name="Bot Draw">
+		<block type="box">
+			<value name="width"><block type="math_number"><field name="NUM">1</field></block></value>
+			<value name="height"><block type="math_number"><field name="NUM">1</field></block></value>
+			<value name="depth"><block type="math_number"><field name="NUM">1</field></block></value>
+		</block>
+		<block type="cylinder">
+			<value name="radius"><block type="math_number"><field name="NUM">10</field></block></value>
+			<value name="height"><block type="math_number"><field name="NUM">3</field></block></value>
+		</block>
+		<block type="cone">
+			<value name="radius"><block type="math_number"><field name="NUM">10</field></block></value>
+			<value name="height"><block type="math_number"><field name="NUM">3</field></block></value>
+		</block>
+		<block type="sphere">
+			<value name="type"><block type="text"><field name="TEXT">1</field></block></value>
+			<value name="radius"><block type="math_number"><field name="NUM">10</field></block></value>
+		</block>	
+
+		<block type="set_color">
+			<value name="color"><block type="text"></block></value>
+		</block>
+
+		<block type="create_text">
+			<value name="text">
+				<block type="text"></block>
+			</value>	
+		</block>
+		<block type="text"></block>		
+
+
+	</category>
+	<category name="Move Bot">
+		<block type="move_to">
+			<value name="x"><block type="math_number"><field name="NUM">1</field></block></value>
+			<value name="y"><block type="math_number"><field name="NUM">1</field></block></value>
+			<value name="z"><block type="math_number"><field name="NUM">1</field></block></value>
+		</block>
+
+		<block type="up">
+			<value name="blocks"><block type="math_number"><field name="NUM">1</field></block></value>
+		</block>
+		<block type="fwd">
+			<value name="blocks"><block type="math_number"><field name="NUM">1</field></block></value>
+		</block>			
+		<block type="turn">
+			<value name="blocks"><block type="math_number"><field name="NUM">1</field></block></value>
+		</block>		
+		<block type="left">
+			<value name="blocks"><block type="math_number"><field name="NUM">1</field></block></value>
+		</block>	
+		<block type="right">
+			<value name="blocks"><block type="math_number"><field name="NUM">1</field></block></value>
+		</block>	
+		<block type="chkpt">
+			<value name="title"><block type="text"></block></value>
+		</block>
 	
-	<block type="box">
-		<value name="width"><block type="math_number"><field name="NUM">1</field></block></value>
-		<value name="height"><block type="math_number"><field name="NUM">1</field></block></value>
-		<value name="depth"><block type="math_number"><field name="NUM">1</field></block></value>
-	</block>
+		<block type="move">
+			<value name="title"><block type="text"></block></value>
+		</block>
 
-	<block type="cylinder">
-		<value name="radius"><block type="math_number"><field name="NUM">10</field></block></value>
-		<value name="height"><block type="math_number"><field name="NUM">3</field></block></value>
-	</block>
-	<block type="cone">
-		<value name="radius"><block type="math_number"><field name="NUM">10</field></block></value>
-		<value name="height"><block type="math_number"><field name="NUM">3</field></block></value>
-	</block>
-			
-
-	<block type="sphere">
-		<value name="type"><block type="text"><field name="TEXT">1</field></block></value>
-		<value name="radius"><block type="math_number"><field name="NUM">10</field></block></value>
-	</block>	
-	<block type="move_to">
-		<value name="x"><block type="math_number"><field name="NUM">1</field></block></value>
-		<value name="y"><block type="math_number"><field name="NUM">1</field></block></value>
-		<value name="z"><block type="math_number"><field name="NUM">1</field></block></value>
-	</block>
-
-	<block type="up">
-		<value name="blocks"><block type="math_number"><field name="NUM">1</field></block></value>
-	</block>
-	<block type="fwd">
-		<value name="blocks"><block type="math_number"><field name="NUM">1</field></block></value>
-	</block>			
-	<block type="turn">
-		<value name="blocks"><block type="math_number"><field name="NUM">1</field></block></value>
-	</block>		
-	<block type="left">
-		<value name="blocks"><block type="math_number"><field name="NUM">1</field></block></value>
-	</block>	
-	<block type="right">
-		<value name="blocks"><block type="math_number"><field name="NUM">1</field></block></value>
-	</block>	
-	<block type="set_color">
-		<value name="color"><block type="text"></block></value>
-	</block>
-	<block type="chkpt">
-		<value name="title"><block type="text"></block></value>
-	</block>
-	
-	<block type="move">
-		<value name="title"><block type="text"></block></value>
-	</block>
-	<block type="text"></block>		
 	</category>
 	<category name="Logic">
       <category name="If">

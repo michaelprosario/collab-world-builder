@@ -94,6 +94,7 @@
 
 			var blocker = document.getElementById( 'blocker' );
 			var instructions = document.getElementById( 'instructions' );
+			var b; //reference to bot
 
 			// http://www.html5rocks.com/en/tutorials/pointerlock/intro/
 
@@ -223,109 +224,27 @@
 				scene.add( pointLight );
 			}
 
-			var textMesh1
-			var text
-			var font
-			var fontName = "optimer"
-
-			function loadFont() {
-
-				var loader = new THREE.FontLoader();
-				loader.load( '/static/fonts/optimer_bold.typeface.js', function ( response ) {
-					font = response;
-					createText("Peter")
-					
-
-				} );
-
-			}
 
 
-			function createText(myText) {
+function loadContent()
+{
+{% for script in scriptList %}
+_{{script}}();
+{% endfor %}
+}
 
-				textGeo = new THREE.TextGeometry( myText, {
+var _font = null;
+function loadFont()
+{
+	var loader = new THREE.FontLoader();
+	loader.load( '/static/fonts/optimer_bold.typeface.js', function ( response ) {
+		_font = response;	
 
-					font: font,
-					size: 70,
-					height: 20,
-					curveSegments: 4,
-
-					bevelThickness: 2,
-					bevelSize: 1.5,
-					bevelEnabled: true,
-
-					material: 0,
-					extrudeMaterial: 1
-
-				});
-
-				textGeo.computeBoundingBox();
-				textGeo.computeVertexNormals();
-
-				// "fix" side normals by removing z-component of normals for side faces
-				// (this doesn't work well for beveled geometry as then we lose nice curvature around z-axis)
-
-				if ( ! bevelEnabled ) {
-
-					var triangleAreaHeuristics = 0.1 * ( height * size );
-
-					for ( var i = 0; i < textGeo.faces.length; i ++ ) {
-
-						var face = textGeo.faces[ i ];
-
-						if ( face.materialIndex == 1 ) {
-
-							for ( var j = 0; j < face.vertexNormals.length; j ++ ) {
-
-								face.vertexNormals[ j ].z = 0;
-								face.vertexNormals[ j ].normalize();
-
-							}
-
-							var va = textGeo.vertices[ face.a ];
-							var vb = textGeo.vertices[ face.b ];
-							var vc = textGeo.vertices[ face.c ];
-
-							var s = THREE.GeometryUtils.triangleArea( va, vb, vc );
-
-							if ( s > triangleAreaHeuristics ) {
-
-								for ( var j = 0; j < face.vertexNormals.length; j ++ ) {
-
-									face.vertexNormals[ j ].copy( face.normal );
-
-								}
-
-							}
-
-						}
-
-					}
-
-				}
-
-				var centerOffset = -0.5 * ( textGeo.boundingBox.max.x - textGeo.boundingBox.min.x );
+		loadContent();
 
 
-				material = new THREE.MeshLambertMaterial({
-		      			color: "green"
-		    		});
-
-				textMesh1 = new THREE.Mesh( textGeo, material );
-
-				textMesh1.position.x = centerOffset;
-				textMesh1.position.y = hover;
-				textMesh1.position.z = 0;
-
-				textMesh1.rotation.x = 0;
-				textMesh1.rotation.y = Math.PI * 2;
-
-				scene.add( textMesh1 );
-
-
-			}
-
-
+	} );
+}
 
 
 			
@@ -428,9 +347,6 @@
 				scene.add( mesh );
 
 
-				{% for script in scriptList %}
-				_{{script}}();
-				{% endfor %}
 
 
 
@@ -446,7 +362,11 @@
 
 				loadFont();
 
+				
+
 			}
+
+
 
 			function getRandomInt(min, max) {
 			  min = Math.ceil(min);

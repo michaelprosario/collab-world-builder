@@ -10,6 +10,9 @@ function rgb(r, g, b) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
+
+
+
 function Bot()
 {
 	this.angle = 0;
@@ -17,6 +20,8 @@ function Bot()
 	this.positionY = 0;
 	this.positionZ = 20;
 	this.drawColor = "purple";
+
+
 
 	this.getDefaultMaterial = function()
 	{
@@ -26,6 +31,10 @@ function Bot()
 
 		return material;
 	}
+
+
+
+
 
 	this.drawBoxAt = function(width,height,depth,x,y,z)
 	{
@@ -112,27 +121,6 @@ function Bot()
 	}
 
 
-	/*
-	this.drawText = function(strText)
-	{
-			var params =	{
-
-					font: font
-
-				}
-
-
-		var geometry = new THREE.TextGeometry(strText,params);
-		var material = this.getDefaultMaterial();
-		var obj = new THREE.Mesh( geometry, material );
-		obj.position.x = this.positionX;
-		obj.position.y = this.positionY;
-		obj.position.z = this.positionZ;
-		
-		scene.add( obj );
-		//objects.push(obj);
-
-	}*/
 
 
 	this.moveUp = function(steps)
@@ -206,7 +194,44 @@ function Bot()
 
 
 
+	//font data and methods .......
 
+	this.createText = function(myText) {
+
+		var textGeo = new THREE.TextGeometry( myText, {
+			font: _font,
+			size: 16,
+			height: 5,
+			curveSegments: 4,
+			bevelThickness: 2,
+			bevelSize: 1.5,
+			bevelEnabled: true,
+			material: 0,
+			extrudeMaterial: 1
+		});
+
+		textGeo.computeBoundingBox();
+		textGeo.computeVertexNormals();
+
+		var centerOffset = -0.5 * ( textGeo.boundingBox.max.x - textGeo.boundingBox.min.x );
+		var material = new THREE.MeshPhongMaterial({
+      			color: this.drawColor
+    		});
+
+		var obj = new THREE.Mesh( textGeo, material );
+		obj.position.x = this.positionX;
+		obj.position.y = this.positionY;
+		obj.position.z = this.positionZ;
+		obj.rotation.x = 0;
+		obj.rotation.y = this.angle;
+
+		scene.add( obj );
+		objects.push(obj);
+		
+
+	}
+
+	
 
 	
 
