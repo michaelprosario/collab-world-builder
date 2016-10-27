@@ -38,7 +38,7 @@ function Bot()
 
 	this.drawBoxAt = function(width,height,depth,x,y,z)
 	{
-		var geometry = new THREE.BoxGeometry( width, height, depth );
+		var geometry = new THREE.BoxGeometry( depth, height, width );
 		var material = this.getDefaultMaterial();
 		var cube = new THREE.Mesh( geometry, material );
 		cube.position.x = x;
@@ -56,7 +56,7 @@ function Bot()
 		if(!depth)
 			depth = width;
 
-		var geometry = new THREE.BoxGeometry( width, height, depth );
+		var geometry = new THREE.BoxGeometry( depth, height, width );
 		var material = this.getDefaultMaterial();
 		var cube = new THREE.Mesh( geometry, material );
 		cube.position.x = this.positionX + width/2;

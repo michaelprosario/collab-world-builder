@@ -15,6 +15,12 @@ def world_list():
 	return render_template('world_list.html', worlds = records)
 
 
+@app.route("/sample_code")
+def sample_code():
+	return render_template('sample_code.html')
+
+
+
 @app.route("/edit_world")
 def edit_world():
 	worlds = WorldBuilder.WorldRepo()

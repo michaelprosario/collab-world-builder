@@ -56,6 +56,12 @@ function saveCode(view) {
 	})
 }
 	
+
+function showSampleCode()
+{
+	window.open("/sample_code");
+}
+
 function getBlocklyXml() {
 	var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
 	var text = Blockly.Xml.domToText(xml);
