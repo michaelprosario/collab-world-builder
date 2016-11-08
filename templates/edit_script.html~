@@ -69,7 +69,9 @@
     <button onclick="saveScript()"  class="btn btn-info">Save</button>	
     <button onclick="deleteScript()"  class="btn btn-info">Delete</button>	
     <button onclick="saveCode('3d-world')"  class="btn btn-info">Draw </button>	
-	<button onclick="saveCode('cardboard')"  class="btn btn-info" style="display:none;">Make Google Cardboard</button>	
+    <button onclick="showSampleCode()"  class="btn btn-info">Sample Code </button>	
+
+    <button onclick="saveCode('cardboard')"  class="btn btn-info" style="display:none;">Make Google Cardboard</button>	
     <button onclick="backToList()"  class="btn btn-info">View World Scripts</button>	
 
     </td>

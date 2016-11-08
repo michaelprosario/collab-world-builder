@@ -16,7 +16,7 @@ def world_list():
 
 
 @app.route("/sample_code")
-def world_list():
+def sample_code():
 	return render_template('sample_code.html')
 
 

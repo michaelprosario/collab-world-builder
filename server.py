@@ -135,7 +135,7 @@ def draw_world_scripts():
 @app.route("/view_cardboard")
 def view_cardboard():
 	id = request.args.get('recordID')
-	return render_template("cardboard.html",recordID = id);
+	return render_template("cardboard.html",recordID = id, k=random.random());
 
 @app.route("/save_js", methods=['POST'])
 def save_js():
